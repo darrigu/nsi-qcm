@@ -482,4 +482,8 @@ i {
    a:hover, a.active {
       color: var(--beige);
    }
+
+   p {
+      text-align: start;
+   }
 }
