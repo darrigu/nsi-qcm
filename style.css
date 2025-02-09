@@ -1,0 +1,385 @@
+:root {
+   --beige: #FFFAE6;
+   --brown-light: #D89348;
+   --green: #35B0A3;
+   --gold: #BBA649;
+   --brown: #7A673F;
+   --blue: #09AFCE;
+   --yellow: #FCE04E;
+   --red: #E14F13;
+   --red-light: #FBD6BC;
+
+   --aside-width: 200px;
+}
+
+* {
+   margin: 0;
+   box-sizing: border-box;
+}
+
+*::selection {
+   background: var(--brown);
+   color: var(--beige);
+}
+
+html, body {
+   color: var(--brown);
+   font-size: 18px;
+   font-weight: bold;
+   background-color: #FDBC4C;
+}
+
+html {
+   height: 100%;
+}
+
+body {
+   min-height: 100%;
+   background: url(food.png) repeat;
+   font-family: 'Nunito', sans-serif;
+   line-height: 1.5;
+   position: relative;
+}
+
+body::after {
+   content: '';
+   display: block;
+   height: 50px;
+}
+
+footer {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   height: 2rem;
+   text-align: center;
+}
+
+body.scoreboard-open {
+   overflow: hidden;
+}
+
+body > header {
+   padding: 1rem 2rem 1rem 2rem;
+   z-index: 1000;
+}
+
+body > header, body > main {
+   padding: 1rem 2rem 1rem 2rem;
+   margin: auto;
+   max-width: 1250px;
+}
+
+aside {
+   display: flex;
+   flex-direction: column;
+   gap: 0.3rem;
+   width: var(--aside-width);
+   float: left;
+   height: 100%;
+   font-size: 1.2rem;
+}
+
+article {
+   margin-left: var(--aside-width);
+   background-color: var(--beige);
+   border-radius: 35px 29px 26px 20px;
+   box-shadow: 14px 19px 0 rgba(0, 0, 0, 0.04);
+   padding: 1rem 1.5rem;
+}
+
+article > header {
+   width: max-content;
+   margin-top: -30px;
+   margin-left: -.5rem;
+   margin-bottom: 1rem;
+   height: 40px;
+   background-color: var(--yellow);
+   border-radius: 40px;
+   padding: 0 1rem;
+   color: var(--blue);
+}
+
+article > main {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+article > main h1 {
+   text-decoration: underline;
+}
+
+nav {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 1rem;
+   margin-top: 1rem;
+}
+
+nav button {
+   font-size: 1.2rem;
+}
+
+#scoreboard {
+   position: fixed;
+   inset: 0;
+   background-color: rgba(255, 255, 255, 0.4);
+   display: flex;
+   place-items: center;
+   place-content: center;
+   backdrop-filter: blur(4px); 
+   z-index: 10;
+   animation: modalOverlayIn .3s;
+}
+
+#scoreboard > div {
+   position: fixed;
+   min-width: max-content;
+   width: 600px;
+   max-width: calc(100vw - 4em);
+   text-align: center;
+   padding: 2rem;
+   font-size: 1.2em;
+   animation: splash .5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#scoreboard table {
+   margin: 1rem auto 1rem auto;
+   border-collapse: separate;
+   border-spacing: 2rem 0;
+}
+
+#scoreboard th {
+   text-decoration: underline;
+}
+
+form {
+   --padding: .5em;
+   padding: var(--padding);
+   border-radius: 62.5px 29px 35px 45px;
+   background: var(--brown-light);
+   margin-top: 0.2rem;
+}
+
+fieldset {
+   border: none;
+   display: flex;
+   flex-direction: column;
+   gap: 0.3rem;
+   background: var(--beige);
+   border-radius: 62.5px 29px 45px 45px;
+   padding-left: 2rem;
+   padding-top: 0.5rem;
+}
+
+label {
+   font: inherit;
+   font-weight: bold;
+   line-height: 1.1;
+   display: grid;
+   grid-template-columns: 1em auto;
+   gap: 0.3em;
+}
+
+input[type='text'] {
+   --shadow-color: rgba(0, 0, 0, 0.04);
+   width: 100%;
+   background: #FFFFFF;
+   border: 2px solid var(--shadow-color);
+   box-sizing: border-box;
+   box-shadow: inset 2px 4px 0 var(--shadow-color);
+   border-radius: 62.5px 29px 45px 45px;
+   height: 54px;
+   padding-left: 1.5em;
+   padding-right: 100px;
+   transition-duration: 200ms;
+}
+
+input[type='text']::placeholder {
+   color: var(--gold);
+}
+
+input[type='text']:focus {
+   outline: none;
+   --shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+input[type='radio'] {
+   appearance: none;
+   width: 1.15em;
+   height: 1.15em;
+   border: 0.15em solid currentColor;
+   border-radius: 50%;
+   transform: translateY(0.15em);
+   display: grid;
+   place-content: center;
+}
+
+input[type='radio']::before {
+   content: '';
+   width: 0.65em;
+   height: 0.65em;
+   border-radius: 50%;
+   transform: scale(0);
+   transition: 120ms transform ease-in-out;
+   box-shadow: inset 1em 1em currentColor;
+}
+
+input[type="radio"]:checked::before {
+   transform: scale(1);
+}
+
+button {
+   --color: var(--green);
+   position: relative;
+   background-color: var(--color);
+   color: var(--beige);
+   height: 54px;
+   border-radius: 20px;
+   padding: 0 1em;
+   transition: 0.3s;
+   border: 3px solid var(--color);
+   overflow: hidden;
+   background-image: linear-gradient(-45deg, transparent 25%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.1) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1) 100%);
+   background-size: 20px 20px;
+   animation: stripe 10s linear infinite;
+}
+
+button:hover {
+   cursor: pointer;
+}
+
+button::before {
+   content: '';
+   position: absolute;
+   inset: 0;
+   background-color: var(--color);
+   opacity: 1;
+   transition: opacity 0.3s;
+   z-index: 1;
+}
+
+button:hover, button:focus {
+   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover::before, button:focus::before {
+   opacity: 0;
+}
+
+button:disabled {
+   pointer-events: none;
+   --color: #c9c9c9;
+}
+
+button span {
+   position: relative;
+   z-index: 2;
+}
+
+p {
+   text-align: justify;
+}
+
+a {
+   color: var(--brown);
+   transition-duration: 200ms;
+   text-decoration: none;
+}
+
+a:hover, a.active {
+   color: var(--brown-light);
+}
+
+p a, strong {
+   color: var(--red);
+}
+
+p a:hover {
+   color: var(--red-light);
+}
+
+i {
+   display: block;
+   margin-top: 0.2rem;
+}
+
+@keyframes stripe {
+   0% {
+      background-position: 0 0;
+   }
+
+   100% {
+      background-position: 100% 0;
+   }
+}
+
+@keyframes splash {
+   from { transform: scale(0); }
+   to { transform: scale(1); }
+}
+
+@keyframes modalOverlayIn {
+   from { opacity: 0; }
+   to { opacity: 1; }
+}
+
+/*
+
+
+fieldset input[data-valid='true']::before {
+}
+
+fieldset input[data-valid='false']::before {
+}
+
+#scoreboard {
+   position: fixed;
+   top: 0;
+   width: 100vw;
+   height: 100vh;
+   z-index: 10;
+   backdrop-filter: blur(10px);
+   transition: 120ms transform ease-in-out;
+   transform: scale(0);
+}
+
+#scoreboard div {
+   position: relative;
+   background-color: var(--background);
+   width: 50%;
+   height: 75%;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   box-shadow: 1px 2px 5px var(--text);
+   border-radius: 10px;
+   padding: 50px;
+}
+
+#scoreboard h1 {
+   text-align: center;
+}
+
+#scoreboard table {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#scoreboard th {
+   padding: 10px;
+}
+
+#scoreboard form {
+   position: absolute;
+   bottom: 0;
+   left: 50%;
+   transform: translate(-50%, 0);
+   padding-bottom: inherit;
+}
+
+*/

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Langages informatiques</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Nunito:wght@600;700&family=Overpass:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+   </head>
+
+   <body>
+      <script src="underscore.js"></script>
+      <script>
+      // TODO: multiple answers questions
+      // TODO: make answer use choice index instead of text
+      let questions = [
+         {
+            title: 'Quels sont les premiers langages de programmation informatiques ?',
+            choices: [
+               'Python, Java, C++',
+               'Assembly, Fortran, COBOL',
+               'HTML, CSS, JavaScript',
+               'Ruby, Go, Kotlin',
+            ],
+            answer: 'Assembly, Fortran, COBOL',
+            hint: `Fortran, l'un des premiers langages de programmation, a été développé dans les années 1950 pour les calculs scientifiques.`,
+         },
+         {
+            title: 'Le langage HTML a été inventé dans les années 1980.',
+            answer: 'Faux',
+            hint: `HTML a été inventé en 1991 par Tim Berners-Lee pour créer la première page web.`,
+         },
+         {
+            title: `Le langage Java a été conçu pour être portable et fonctionner sur n'importe quelle plateforme.`,
+            answer: 'Vrai',
+            hint: `Le slogan "Write once, run anywhere" est une des grandes promesses du langage Java.`,
+         },
+         {
+            title: 'Qui a créé le premier langage de programmation ?',
+            choices: [
+               'Charles Babbage',
+               'Ada Lovelace',
+               'Alan Turing',
+               'John von Neumann',
+            ],
+            answer: 'Ada Lovelace',
+            hint: `Ada Lovelace est considérée comme la première programmeuse de l'histoire grâce à son travail sur la machine analytique de Charles Babbage.`,
+         },
+         {
+            title: 'Quel est le but principal du langage COBOL ?',
+            choices: [
+               'Manipulation de texte',
+               'Calcul scientifique',
+               'Gestion des bases de données',
+               'Applications de gestion d’entreprises',
+            ],
+            answer: 'Applications de gestion d’entreprises',
+            hint: `COBOL, lancé en 1959, est encore utilisé dans de nombreux systèmes bancaires et administratifs aujourd'hui.`,
+         },
+         {
+            title: 'Le langage Fortran est toujours utilisé principalement dans le développement web.',
+            answer: 'Faux',
+            hint: `Fortran est principalement utilisé dans les domaines scientifiques et d’ingénierie, pas pour le développement web.`,
+         },
+         {
+            title: 'Le langage Python a été créé par :',
+            choices: [
+               'Bjarne Stroustrup',
+               'Dennis Ritchie',
+               'Guido van Rossum',
+               'Linus Torvalds',
+            ],
+            answer: 'Guido van Rossum',
+            hint: `Python a été conçu pour être simple à lire et à utiliser, ce qui explique sa popularité dans l'éducation et l'industrie.`,
+         },
+         {
+            title: 'Le langage C est la base de nombreux langages modernes, y compris Java.',
+            answer: 'Vrai',
+            hint: `Java a été inspiré par C et C++, mais a été conçu pour être plus simple et plus sûr à utiliser.`,
+         },
+         {
+            title: `Quel langage est considéré comme l'ancêtre des langages modernes ?`,
+            choices: [
+               'Fortran',
+               'Assembly',
+               'COBOL',
+               'Lisp',
+            ],
+            answer: 'Assembly',
+            hint: `Le langage assembleur est le plus proche du langage machine et est souvent utilisé pour des applications nécessitant une grande performance.`,
+         },
+         {
+            title: 'Le langage Python était initialement destiné à des applications orientées Web.',
+            answer: 'Faux',
+            hint: `Python a été conçu par Guido van Rossum pour simplifier la programmation, et bien qu’il soit utilisé pour le Web, il est largement utilisé dans d'autres domaines comme l'analyse de données.`,
+         },
+      ];
+
+      const questionsPerPage = 5;
+      const pagesCount = Math.ceil(questions.length/questionsPerPage);
+      let page = 1;
+      let submitted = false;
+
+      const aside = () => _aside((aside) => {
+         const links = {
+            'Historique': '#/historique',
+            'Sources': '#/sources',
+            'Auteurs': '#/auteurs',
+            'QCM': '#/qcm',
+         };
+         for (const name of Object.keys(links)) {
+            // TODO: proper way to select active link
+            aside.append(_a(name, links[name])._att(('#' + document.location.hash.split('#')[1] || '') === links[name] && { class: 'active' }));
+         }
+      });
+
+      const title = (title) => {
+         document.title = title + ' | Langages Informatiques';
+         return _h1(title);
+      };
+
+      document.body.append(
+         _header(
+            _h1(_a('Langages Informatiques', '#')),
+         ),
+         _router({
+            '/': () => [
+               aside(),
+               _article(
+                  _header(
+                     title('Accueil'),
+                  ),
+                  _main(
+                     _section(
+                        _p(`Ce site explore l'évolution des langages informatiques, de leurs origines aux technologies modernes.`),
+                        _p(`Dans les pages suivantes, vous découvrirez les premiers langages de programmation, leur évolution, les raisons derrière l'apparition de nouveaux langages, et leur impact sur le développement de logiciels et d'algorithmes.`),
+                     ),
+                  ),
+               ),
+            ],
+            '/historique': () => [
+               aside(),
+               _article(
+                  _header(
+                     title('Historique des Langages Informatiques'),
+                  ),
+                  _main(
+                     _section(
+                        _h1('Les premiers langages de programmation'),
+                        _p(`Les premiers langages informatiques remontent aux années 1950. L'un des premiers langages créés était le `, _a('Fortran', 'https://fr.wikipedia.org/wiki/Fortran')._att({ target: '_blank' }), `, développé par IBM pour les calculs scientifiques. Il a été suivi par des langages comme `, _a('Cobol', 'https://fr.wikipedia.org/wiki/Cobol')._att({ target: '_blank' }), ` (1959), conçu pour les applications commerciales, et `, _a('Lisp', 'https://fr.wikipedia.org/wiki/Lisp')._att({ target: '_blank' }), ` (1958), axé sur les applications d'intelligence artificielle.`),
+                     ),
+                     _section(
+                        _h1('Évolution des langages'),
+                        _p(`Les langages de programmation ont évolué pour répondre à des besoins de plus en plus complexes. Dans les années 70 et 80, des langages comme `, _a('C', 'https://fr.wikipedia.org/wiki/C_(langage)')._att({ target: '_blank' }), ` ont permis de créer des systèmes d'exploitation et des applications plus performants. Aujourd'hui, des langages comme `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), `, `, _a('JavaScript', 'https://fr.wikipedia.org/wiki/JavaScript')._att({ target: '_blank' }), `, et `, _a('Rust', 'https://fr.wikipedia.org/wiki/Rust_(langage)')._att({ target: '_blank' }), ` dominent dans différents domaines, allant du développement web à l'intelligence artificielle.`),
+                     ),
+                     _section(
+                        _h1('Pourquoi de nouveaux langages ?'),
+                        _p(`De nouveaux langages apparaissent constamment pour résoudre des problèmes spécifiques. Par exemple, `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), ` a été développé pour simplifier la programmation et est devenu incontournable dans les domaines de la science des données et de l'intelligence artificielle. Les langages modernes offrent des caractéristiques comme la gestion automatique de la mémoire, la sécurité renforcée et une meilleure performance.`),
+                     ),
+                  ),
+               ),
+            ],
+            '/sources': () => [
+               aside(),
+               _article(
+                  _header(
+                     title('Sources'),
+                  ),
+                  _main(
+                     _section(
+                        _h1('Liste des Sources'),
+                        _ul(
+                           _li(_a('Wikipedia', 'https://www.wikipedia.org')._att({ target: '_blank' })),
+                           _li('Connaissances personnelles'),
+                        ),
+                     ),
+                  ),
+               ),
+            ],
+            '/auteurs': () => [
+               aside(),
+               _article(
+                  _header(
+                     title('Auteurs'),
+                  ),
+                  _main(
+                     _section(
+                        _h1('Répartition des tâches'),
+                        _ul(
+                           _li('Hugo Darrieutort-Garcia : Recherches, rédaction, design, mise en page et tests.'),
+                        ),
+                     ),
+                  ),
+               ),
+            ],
+            '/qcm': (router) => [
+               aside(),
+               _article(
+                  _header(
+                     title('QCM'),
+                  ),
+                  _main((sections) => {
+                     const first = questionsPerPage*(page - 1);
+                     for (const question of questions.slice(first, first + questionsPerPage)) {
+                        sections.append(_section((section) => {
+                           section.append(
+                              _h1(question.title), 
+                              _form(_fieldset((fieldset) => {
+                                 fieldset.disabled = submitted;
+                                 const choices = question.choices ?? ['Vrai', 'Faux'];
+                                 for (const choice of choices) {
+                                    fieldset.append(_label(
+                                       _input('radio')
+                                          ._onclick(() => question.userAnswer = choice)
+                                          ._att({ name: 'choice' })
+                                          ._att(question.userAnswer === choice && { checked: 'checked' })
+                                          ._att(submitted && { dataValid: question.userAnswer === choice && question.userAnswer === question.answer }),
+                                       choice,
+                                    ));
+                                 }
+                              })),
+                           );
+
+                           if (submitted) {
+                              section.append(_i(question.hint));
+                           }
+                        }));
+                     }
+                  }),
+                  _nav(
+                     // TODO: extract this
+                     _button(_span('«'))
+                        ._onclick(() => {
+                           page -= 1;
+                           router.refresh();
+                           window.scrollTo(0, 0);
+                        })
+                        ._att(page === 1 && { disabled: 'disabled' }),
+                     `${page}/${pagesCount}`,
+                     _button(_span('»'))
+                        ._onclick(() => {
+                           page += 1;
+                           router.refresh();
+                           window.scrollTo(0, 0);
+                        })
+                        ._att(page >= pagesCount && { disabled: 'disabled' }),
+                     page === pagesCount &&
+                        _button(_span(submitted ? 'Voir le Score' : 'Valider'))._onclick((e) => { 
+                           let score = 0;
+                           for (const question of questions) {
+                              score += +(question.userAnswer === question.answer);
+                           }
+
+                           // TODO: extract & rewrite this
+                           document.body.classList.add('scoreboard-open');
+                           document.body.append(_div(
+                              _div(
+                                 _h1('Tableau des Scores'),
+                                 _table(
+                                    _tr(
+                                       _th('Pseudo'),
+                                       _th('Score'),
+                                    ),
+                                    (scoreboard) => {
+                                       fetch('api.php').then((res) => res.json()).then((scores) => {
+                                          for (const score of scores.slice(0, 10).sort((a, b) => b.score - a.score)) {
+                                             scoreboard.append(
+                                                _tr(
+                                                   _td(score.username),
+                                                   _td(score.score.toString()),
+                                                ),
+                                             );
+                                          }
+                                       });
+                                    },
+                                 ),
+                                 `Vous avez eu ${score}/${questions.length} points`,
+                                 _form(
+                                    _input('text')._att({ placeholder: 'Entrez votre pseudo pour enregistrer votre score' }),
+                                 )._onsubmit((e) => {
+                                    e.preventDefault()
+
+                                    const username = e.target[0];
+
+                                    fetch('api.php', {
+                                       method: 'POST',
+                                       headers: {
+                                          'Content-Type': 'application/json',
+                                       },
+                                       body: JSON.stringify({ username: username.value, score }),
+                                    });
+
+                                    username.value = '';
+                                 }),
+                              )._onclick((e) => e.stopPropagation()),
+                           )._att({ id: 'scoreboard' })._onclick((e) => {
+                              document.body.classList.remove('scoreboard-open');
+                              e.target.style.transform = 'scale(0)';
+                           }));
+
+                           submitted = true;
+                           router.refresh();
+                        }),
+                     submitted &&
+                        _button(_span('Réessayer'))._onclick((e) => {
+                           submitted = false;
+                           page = 1;
+
+                           for (const question of questions) {
+                              delete question.userAnswer;
+                           }
+
+                           router.refresh();
+                           window.scrollTo(0, 0);
+                        }),
+                  ),
+               ),
+            ],
+            '/404': () => [
+               aside(),
+               _article(
+                  title('Page Introuvable'),
+                  _p(_a(`Retourner à l'accueil`, '#')),
+               ),
+            ],
+         }, _main),
+         _footer(_a('Cours de NSI', 'https://aura-01.elea.apps.education.fr/course/view.php?id=1324'), ' — ', _a('ENT', 'https://plaine-ain.ent.auvergnerhonealpes.fr')),
+      );
+      </script>
+   </body>
+</html>
