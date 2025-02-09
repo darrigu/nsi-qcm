@@ -162,8 +162,7 @@ nav button {
 }
 
 form {
-   --padding: .5em;
-   padding: var(--padding);
+   padding: 0.5rem;
    border-radius: 62.5px 29px 35px 45px;
    background: var(--brown-light);
    margin-top: 0.2rem;
@@ -198,8 +197,8 @@ input[type='text'] {
    box-shadow: inset 2px 4px 0 var(--shadow-color);
    border-radius: 62.5px 29px 45px 45px;
    height: 54px;
-   padding-left: 1.5em;
-   padding-right: 100px;
+   padding-left: 1.5rem;
+   padding-right: 1.5rem;
    transition-duration: 200ms;
 }
 
@@ -224,17 +223,26 @@ input[type='radio'] {
 }
 
 input[type='radio']::before {
+   --color: currentColor;
    content: '';
    width: 0.65em;
    height: 0.65em;
    border-radius: 50%;
    transform: scale(0);
    transition: 120ms transform ease-in-out;
-   box-shadow: inset 1em 1em currentColor;
+   box-shadow: inset 1em 1em var(--color);
 }
 
 input[type="radio"]:checked::before {
    transform: scale(1);
+}
+
+input[data-valid='true']::before {
+   --color: var(--green);
+}
+
+input[data-valid='false']::before {
+   --color: var(--red);
 }
 
 button {
@@ -386,15 +394,19 @@ i {
       margin: auto;
    }
 
+   article > main {
+      gap: 1.5rem;
+   }
+
+   article > main h1 {
+      text-align: center;
+   }
+
+   #scoreboard > div {
+      font-size: 85%;
+   }
+
    a:hover, a.active {
       color: var(--beige);
    }
 }
-
-/*
-fieldset input[data-valid='true']::before {
-}
-
-fieldset input[data-valid='false']::before {
-}
-*/
