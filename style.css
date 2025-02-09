@@ -365,7 +365,7 @@ i {
       top: 0;
       left: 0;
       background: var(--brown-light);
-      border-radius: 35px 29px 26px 20px;
+      border-radius: 35px 29px 26px 0;
       justify-content: center;
       text-align: center;
    }
