@@ -373,6 +373,14 @@ i {
       width: var(--aside-width);
    }
 
+   nav {
+      flex-wrap: wrap;
+   }
+
+   nav button {
+      font-size: 1rem;
+   }
+
    article {
       margin: auto;
    }
