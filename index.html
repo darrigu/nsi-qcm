@@ -266,7 +266,7 @@
                         })
                         ._att(page >= pagesCount && { disabled: 'disabled' }),
                      page === pagesCount &&
-                        _button(_span(qcmSubmitted ? 'Voir le Score' : 'Valider'))._onclick((e) => { 
+                        _button(_span(qcmSubmitted ? 'Voir les Scores' : 'Valider'))._onclick((e) => { 
                            let score = 0;
                            for (const question of questions) {
                               score += +(question.userAnswer === question.answer);
@@ -355,7 +355,13 @@
                ),
             ],
          }, _main)._onclick(() => document.querySelector('aside').classList.remove('opened')),
-         _footer(_a('Cours de NSI', 'https://aura-01.elea.apps.education.fr/course/view.php?id=1324')._att({ target: '_blank', dataTooltip: 'Par M. Fasquelle' }), ' — ', _a('ENT', 'https://plaine-ain.ent.auvergnerhonealpes.fr')._att({ target: '_blank', dataTooltip: `Lycée de la Plaine de l'Ain` })),
+         _footer(
+            _a('Cours de NSI', 'https://aura-01.elea.apps.education.fr/course/view.php?id=1324')
+               ._att({ target: '_blank', dataTooltip: 'Par M. Fasquelle' }),
+            ' — ',
+            _a('ENT', 'https://plaine-ain.ent.auvergnerhonealpes.fr')
+               ._att({ target: '_blank', dataTooltip: `Lycée de la Plaine de l'Ain` })
+         ),
       );
       </script>
    </body>
