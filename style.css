@@ -377,7 +377,7 @@ i {
       margin: auto;
    }
 
-   a.active {
+   a:hover, a.active {
       color: var(--beige);
    }
 }
