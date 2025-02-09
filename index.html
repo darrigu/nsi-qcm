@@ -8,6 +8,11 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Nunito:wght@600;700&family=Overpass:wght@700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="style.css">
+      <script>
+      if (document.location.pathname !== '' && document.location.pathname !== '/') {
+         document.location.href = '/#' + document.location.pathname;
+      }
+      </script>
    </head>
 
    <body>
@@ -163,6 +168,7 @@
                         _h1('Les premiers langages de programmation'),
                         _p(`Les premiers langages informatiques remontent aux années 1950. L'un des premiers langages créés était le `, _a('Fortran', 'https://fr.wikipedia.org/wiki/Fortran')._att({ target: '_blank' }), `, développé par IBM pour les calculs scientifiques. Il a été suivi par des langages comme `, _a('Cobol', 'https://fr.wikipedia.org/wiki/Cobol')._att({ target: '_blank' }), ` (1959), conçu pour les applications commerciales, et `, _a('Lisp', 'https://fr.wikipedia.org/wiki/Lisp')._att({ target: '_blank' }), ` (1958), axé sur les applications d'intelligence artificielle.`),
                      ),
+                     _div(_img('timeline.png'))._att({ dataTooltip: 'Frise des langages' }),
                      _section(
                         _h1('Évolution des langages'),
                         _p(`Les langages de programmation ont évolué pour répondre à des besoins de plus en plus complexes. Dans les années 70 et 80, des langages comme `, _a('C', 'https://fr.wikipedia.org/wiki/C_(langage)')._att({ target: '_blank' }), ` ont permis de créer des systèmes d'exploitation et des applications plus performants. Aujourd'hui, des langages comme `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), `, `, _a('JavaScript', 'https://fr.wikipedia.org/wiki/JavaScript')._att({ target: '_blank' }), `, et `, _a('Rust', 'https://fr.wikipedia.org/wiki/Rust_(langage)')._att({ target: '_blank' }), ` dominent dans différents domaines, allant du développement web à l'intelligence artificielle.`),
@@ -243,14 +249,14 @@
                   }),
                   _nav(
                      // TODO: extract this
-                     _button(_span('«'))
+                     _button(_span('«')) 
                         ._onclick(() => {
                            page -= 1;
                            router.refresh();
                            toTop();
                         })
                         ._att(page === 1 && { disabled: 'disabled' }),
-                     `${page}/${pagesCount}`,
+                     _span(`${page}/${pagesCount}`)._att({ dataTooltip: `Page ${page}/${pagesCount}` }),
                      _button(_span('»'))
                         ._onclick(() => {
                            page += 1;
