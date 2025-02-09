@@ -469,6 +469,16 @@ i {
       font-size: 85%;
    }
 
+   div:has(> img:first-child:last-child) {
+      padding: 0;
+      border-radius: 0;
+      background: none;
+   }
+
+   img {
+      border-radius: 10px;
+   }
+
    a:hover, a.active {
       color: var(--beige);
    }
