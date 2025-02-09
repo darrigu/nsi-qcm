@@ -111,9 +111,9 @@
 
       const aside = () => _aside((aside) => {
          const links = {
-            'Historique': '#/historique',
+            'Contenu': '#/contenu',
             'Sources': '#/sources',
-            'Auteurs': '#/auteurs',
+            'À propos': '#/a-propos',
             'QCM': '#/qcm',
          };
          for (const name of Object.keys(links)) {
@@ -158,25 +158,25 @@
                   ),
                ),
             ],
-            '/historique': () => [
+            '/contenu': () => [
                aside,
                _article(
                   _header(
-                     title('Historique'),
+                     title('Contenu'),
                   ),
                   _main(
                      _section(
                         _h1('Les premiers langages de programmation'),
-                        _p(`Les premiers langages informatiques remontent aux années 1950. L'un des premiers langages créés était le `, _a('Fortran', 'https://fr.wikipedia.org/wiki/Fortran')._att({ target: '_blank' }), `, développé par IBM pour les calculs scientifiques. Il a été suivi par des langages comme `, _a('Cobol', 'https://fr.wikipedia.org/wiki/Cobol')._att({ target: '_blank' }), ` (1959), conçu pour les applications commerciales, et `, _a('Lisp', 'https://fr.wikipedia.org/wiki/Lisp')._att({ target: '_blank' }), ` (1958), axé sur les applications d'intelligence artificielle.`),
+                        _p(`Les premiers langages informatiques remontent aux années 1950. L'un des premiers langages créés était le `, _a('Fortran', 'https://fr.wikipedia.org/wiki/Fortran')._att({ target: '_blank' }), `, développé par `, _a('IBM', 'https://fr.wikipedia.org/wiki/IBM')._att({ target: '_blank' }), ` pour les calculs scientifiques. Il a été suivi par des langages comme `, _a('Cobol', 'https://fr.wikipedia.org/wiki/Cobol')._att({ target: '_blank' }), ` (1959), conçu pour les applications commerciales, et `, _a('Lisp', 'https://fr.wikipedia.org/wiki/Lisp')._att({ target: '_blank' }), ` (1958), axé sur la recherche en intelligence artificielle.`),
                      ),
                      _div(_img('timeline.png'))._att({ dataTooltip: 'Frise chronologique des langages' }),
                      _section(
                         _h1('Évolution des langages'),
-                        _p(`Les langages de programmation ont évolué pour répondre à des besoins de plus en plus complexes. Dans les années 70 et 80, des langages comme `, _a('C', 'https://fr.wikipedia.org/wiki/C_(langage)')._att({ target: '_blank' }), ` ont permis de créer des systèmes d'exploitation et des applications plus performants. Aujourd'hui, des langages comme `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), `, `, _a('JavaScript', 'https://fr.wikipedia.org/wiki/JavaScript')._att({ target: '_blank' }), `, et `, _a('Rust', 'https://fr.wikipedia.org/wiki/Rust_(langage)')._att({ target: '_blank' }), ` dominent dans différents domaines, allant du développement web à l'intelligence artificielle.`),
+                        _p(`Les langages de programmation ont évolué pour répondre à des besoins de plus en plus complexes. Dans les années 70 et 80, des langages comme `, _a('C', 'https://fr.wikipedia.org/wiki/C_(langage)')._att({ target: '_blank' }), ` ont permis de créer des systèmes d'exploitation et des applications. Aujourd'hui, des langages comme `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), `, `, _a('JavaScript', 'https://fr.wikipedia.org/wiki/JavaScript')._att({ target: '_blank' }), `, et `, _a('Rust', 'https://fr.wikipedia.org/wiki/Rust_(langage)')._att({ target: '_blank' }), ` dominent dans différents domaines, allant du développement web à l'intelligence artificielle.`),
                      ),
                      _section(
                         _h1('Pourquoi de nouveaux langages ?'),
-                        _p(`De nouveaux langages apparaissent constamment pour résoudre des problèmes spécifiques. Par exemple, `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), ` a été développé pour simplifier la programmation et est devenu incontournable dans les domaines de la science des données et de l'intelligence artificielle. Les langages modernes offrent des caractéristiques comme la gestion automatique de la mémoire, la sécurité renforcée et une meilleure performance.`),
+                        _p(`De nouveaux langages apparaissent constamment pour résoudre des problèmes spécifiques. Par exemple, `, _a('Python', 'https://fr.wikipedia.org/wiki/Python_(langage)')._att({ target: '_blank' }), ` a été développé pour simplifier la programmation et est devenu incontournable dans les domaines de la science des données et de l'intelligence artificielle. Les langages modernes offrent des caractéristiques comme la gestion automatique de la mémoire, la sécurité renforcée et de meilleures performances.`),
                      ),
                   ),
                ),
@@ -189,26 +189,54 @@
                   ),
                   _main(
                      _section(
-                        _h1('Liste des Sources'),
-                        _ul(
-                           _li(_a('Wikipedia', 'https://www.wikipedia.org')._att({ target: '_blank' })),
-                           _li('Connaissances personnelles'),
+                        _h1('Informations'),
+                        _p(
+                           _ul(
+                              _li(_a('Wikipedia', 'https://www.wikipedia.org')._att({ target: '_blank' })),
+                              _li('Connaissances personnelles'),
+                           ),
+                        ),
+                     ),
+                     _section(
+                        _h1('Ressources'),
+                        _p(
+                           _ul(
+                              _li(_a('Subtle Patterns', 'https://www.toptal.com/designers/subtlepatterns')._att({ target: '_blank' }), ' (', _a('Image de fond', 'https://www.toptal.com/designers/subtlepatterns/food')._att({ target: '_blank' }), ')'),
+                              _li('Police (', _a('Nunito', 'https://fonts.google.com/specimen/Nunito')._att({ target: '_blank' }), ')'),
+                              _li(_a(`Image de l'accueil`, 'https://medium.com/elp-2018/les-usages-et-int%C3%A9r%C3%AAts-de-la-programmation-d%C3%A9clarative-74f69d6d5690')._att({ target: '_blank' })),
+                              _li(_a(`Frise chronologique des langages`, 'https://medium.com/@daniel_wintermeyer/the-history-of-code-and-where-nocode-fits-in-2f4797730137')._att({ target: '_blank' })),
+                           ),
                         ),
                      ),
                   ),
                ),
             ],
-            '/auteurs': () => [
+            '/a-propos': () => [
                aside,
                _article(
                   _header(
-                     title('Auteurs'),
+                     title('À propos'),
                   ),
                   _main(
                      _section(
-                        _h1('Répartition des tâches'),
-                        _ul(
-                           _li('Hugo Darrieutort-Garcia : Recherches, rédaction, design, mise en page et tests.'),
+                        _h1('Auteur'),
+                        _p(`L'entièreté de ce site a été designé, rédigé, developpé et testé par `, _a('Hugo Darrieutort-Garcia', 'https://github.com/darrigu')._att({ target: '_blank' }), '.'),
+                     ),
+                     _section(
+                        _h1('Mentions spéciales'),
+                        _p(`Merci à Basma et Alexy pour leurs différents retours, ayant contribués à l'amélioration de ce site.`),
+                     ),
+                     _section(
+                        _h1('Inspirations'),
+                        _p(`Le design de ce site est grandement inspiré par les jeux `, _a('Animal Crossing', 'https://fr.wikipedia.org/wiki/Animal_Crossing')._att({ target: '_blank' }), `.`),
+                     ),
+                     _section(
+                        _h1('Code source & Libraires'),
+                        _p(
+                           _ul(
+                              _li(_a('Dépot GitHub', 'https://github.com/darrigu/nsi-qcm')._att({ target: '_blank' })),
+                              _li(_a('Underscore.JS', 'https://github.com/darrigu/underscore.js')._att({ target: '_blank' })),
+                           ),
                         ),
                      ),
                   ),
