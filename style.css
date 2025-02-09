@@ -361,7 +361,7 @@ i {
       width: 0;
       height: 100vh;
       transition-duration: 200ms;
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       background: var(--brown-light);
