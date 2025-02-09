@@ -1,11 +1,15 @@
 const appendChildren = (node, children) => {
    for (const child of children) {
-      if (typeof child === 'string')
+      if (typeof child === 'string') {
          node.append(document.createTextNode(child))
-      else if (typeof child === 'function')
-         child(node);
-      else if (child)
+      } else if (typeof child === 'function') {
+         const maybeChild = child(node);
+         if (maybeChild) {
+            node.append(maybeChild);
+         }
+      } else if (child) {
          node.append(child);
+      }
    }
 };
 

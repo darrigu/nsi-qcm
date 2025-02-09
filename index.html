@@ -102,7 +102,7 @@
       const pagesCount = Math.ceil(questions.length/questionsPerPage);
       let page = 1;
       let qcmSubmitted = false;
-      let pseudoSubmitted = true;
+      let pseudoSubmitted = true; 
 
       const aside = () => _aside((aside) => {
          const links = {
@@ -115,12 +115,19 @@
             // TODO: proper way to select active link
             aside.append(_a(name, links[name])._att(('#' + document.location.hash.split('#')[1] || '') === links[name] && { class: 'active' }));
          }
-      });
+      })._onclick((e) => e.stopPropagation());
 
       const title = (title) => {
          document.title = title + ' | Langages Informatiques';
          return _h1(title);
       };
+
+      const toTop = () =>
+         window.scrollTo({
+            top: document.body.offsetTop,
+            left: 0,
+            behavior: 'smooth'
+         });
 
       document.body.append(
          _header(
@@ -132,7 +139,7 @@
          })._att({ id: 'open-sidebar' }),
          _router({
             '/': () => [
-               aside(),
+               aside,
                _article(
                   _header(
                      title('Accueil'),
@@ -146,7 +153,7 @@
                ),
             ],
             '/historique': () => [
-               aside(),
+               aside,
                _article(
                   _header(
                      title('Historique'),
@@ -168,7 +175,7 @@
                ),
             ],
             '/sources': () => [
-               aside(),
+               aside,
                _article(
                   _header(
                      title('Sources'),
@@ -185,7 +192,7 @@
                ),
             ],
             '/auteurs': () => [
-               aside(),
+               aside,
                _article(
                   _header(
                      title('Auteurs'),
@@ -201,7 +208,7 @@
                ),
             ],
             '/qcm': (router) => [
-               aside(),
+               aside,
                _article(
                   _header(
                      title('QCM'),
@@ -240,11 +247,7 @@
                         ._onclick(() => {
                            page -= 1;
                            router.refresh();
-                           window.scrollTo({
-                              top: document.body.offsetTop,
-                              left: 0,
-                              behavior: 'smooth'
-                           });
+                           toTop();
                         })
                         ._att(page === 1 && { disabled: 'disabled' }),
                      `${page}/${pagesCount}`,
@@ -252,11 +255,7 @@
                         ._onclick(() => {
                            page += 1;
                            router.refresh();
-                           window.scrollTo({
-                              top: document.body.offsetTop,
-                              left: 0,
-                              behavior: 'smooth'
-                           });
+                           toTop();
                         })
                         ._att(page >= pagesCount && { disabled: 'disabled' }),
                      page === pagesCount &&
@@ -266,7 +265,7 @@
                               score += +(question.userAnswer === question.answer);
                            }
 
-                           const fn = (scoreboard) => {
+                           const scoreboard = (scoreboard) => {
                               fetch('api.php').then((res) => res.json()).then((scores) => {
                                  for (const score of scores.slice(0, 10).sort((a, b) => b.score - a.score)) {
                                     scoreboard.append(
@@ -291,7 +290,7 @@
                                           _th('Score'),
                                        ),
                                     ),
-                                    _tbody(fn),
+                                    _tbody(scoreboard),
                                  ),
                                  `Vous avez eu ${score}/${questions.length} points`,
                                  // TODO: update table above on submit
@@ -315,7 +314,7 @@
 
                                     const tbody = document.querySelector('tbody');
                                     tbody.innerHTML = '';
-                                    fn(tbody);
+                                    scoreboard(tbody);
                                  }),
                               )._onclick((e) => e.stopPropagation()),
                            )._att({ id: 'scoreboard' })._onclick((e) => {
@@ -336,23 +335,19 @@
                            }
 
                            router.refresh();
-                           window.scrollTo({
-                              top: document.body.offsetTop,
-                              left: 0,
-                              behavior: 'smooth'
-                           });
+                           toTop();
                         }),
                   ),
                ),
             ],
             '/404': () => [
-               aside(),
+               aside,
                _article(
                   title('Page Introuvable'),
                   _p(_a(`Retourner à l'accueil`, '#')),
                ),
             ],
-         }, _main),
+         }, _main)._onclick(() => document.querySelector('aside').classList.remove('opened')),
          _footer(_a('Cours de NSI', 'https://aura-01.elea.apps.education.fr/course/view.php?id=1324'), ' — ', _a('ENT', 'https://plaine-ain.ent.auvergnerhonealpes.fr')),
       );
       </script>
