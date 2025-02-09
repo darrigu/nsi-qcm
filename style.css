@@ -359,6 +359,7 @@ i {
 
    aside {
       width: 0;
+      height: 100vh;
       transition-duration: 200ms;
       position: absolute;
       top: 0;
