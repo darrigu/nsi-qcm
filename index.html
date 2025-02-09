@@ -125,6 +125,10 @@
          _header(
             _h1(_a('Langages Informatiques', '#')),
          ),
+         _button(_span(_img('hamburger.svg')))._onclick(() => {
+            const aside = document.querySelector('aside');
+            aside.classList.toggle('opened');
+         })._att({ id: 'open-sidebar' }),
          _router({
             '/': () => [
                aside(),

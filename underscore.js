@@ -38,7 +38,7 @@ for (let tagName of ['abbr', 'address', 'area', 'article', 'aside', 'audio', 'b'
    window['_' + tagName] = (...children) => _(tagName, ...children);
 
 const _a = (name, href) => _('a', name)._att({ href });
-const _img = (src) => _('src')._att({ src })
+const _img = (src) => _('img')._att({ src })
 const _input = (type) => _('input')._att({ type });
 
 // TODO: nested routers
