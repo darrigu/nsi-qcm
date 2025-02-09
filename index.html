@@ -101,7 +101,8 @@
       const questionsPerPage = 5;
       const pagesCount = Math.ceil(questions.length/questionsPerPage);
       let page = 1;
-      let submitted = false;
+      let qcmSubmitted = false;
+      let pseudoSubmitted = true;
 
       const aside = () => _aside((aside) => {
          const links = {
@@ -212,7 +213,7 @@
                            section.append(
                               _h1(question.title), 
                               _form(_fieldset((fieldset) => {
-                                 fieldset.disabled = submitted;
+                                 fieldset.disabled = qcmSubmitted;
                                  const choices = question.choices ?? ['Vrai', 'Faux'];
                                  for (const choice of choices) {
                                     fieldset.append(_label(
@@ -220,14 +221,14 @@
                                           ._onclick(() => question.userAnswer = choice)
                                           ._att({ name: 'choice' })
                                           ._att(question.userAnswer === choice && { checked: 'checked' })
-                                          ._att(submitted && { dataValid: question.userAnswer === choice && question.userAnswer === question.answer }),
+                                          ._att(qcmSubmitted && { dataValid: question.userAnswer === choice && question.userAnswer === question.answer }),
                                        choice,
                                     ));
                                  }
                               })),
                            );
 
-                           if (submitted) {
+                           if (qcmSubmitted) {
                               section.append(_i(question.hint));
                            }
                         }));
@@ -239,7 +240,11 @@
                         ._onclick(() => {
                            page -= 1;
                            router.refresh();
-                           window.scrollTo(0, 0);
+                           window.scrollTo({
+                              top: document.body.offsetTop,
+                              left: 0,
+                              behavior: 'smooth'
+                           });
                         })
                         ._att(page === 1 && { disabled: 'disabled' }),
                      `${page}/${pagesCount}`,
@@ -247,15 +252,32 @@
                         ._onclick(() => {
                            page += 1;
                            router.refresh();
-                           window.scrollTo(0, 0);
+                           window.scrollTo({
+                              top: document.body.offsetTop,
+                              left: 0,
+                              behavior: 'smooth'
+                           });
                         })
                         ._att(page >= pagesCount && { disabled: 'disabled' }),
                      page === pagesCount &&
-                        _button(_span(submitted ? 'Voir le Score' : 'Valider'))._onclick((e) => { 
+                        _button(_span(qcmSubmitted ? 'Voir le Score' : 'Valider'))._onclick((e) => { 
                            let score = 0;
                            for (const question of questions) {
                               score += +(question.userAnswer === question.answer);
                            }
+
+                           const fn = (scoreboard) => {
+                              fetch('api.php').then((res) => res.json()).then((scores) => {
+                                 for (const score of scores.slice(0, 10).sort((a, b) => b.score - a.score)) {
+                                    scoreboard.append(
+                                       _tr(
+                                          _td(score.username),
+                                          _td(score.score.toString()),
+                                       ),
+                                    );
+                                 }
+                              });
+                           };
 
                            // TODO: extract & rewrite this
                            document.body.classList.add('scoreboard-open');
@@ -263,26 +285,17 @@
                               _div(
                                  _h1('Tableau des Scores'),
                                  _table(
-                                    _tr(
-                                       _th('Pseudo'),
-                                       _th('Score'),
+                                    _thead(
+                                       _tr(
+                                          _th('Pseudo'),
+                                          _th('Score'),
+                                       ),
                                     ),
-                                    (scoreboard) => {
-                                       fetch('api.php').then((res) => res.json()).then((scores) => {
-                                          for (const score of scores.slice(0, 10).sort((a, b) => b.score - a.score)) {
-                                             scoreboard.append(
-                                                _tr(
-                                                   _td(score.username),
-                                                   _td(score.score.toString()),
-                                                ),
-                                             );
-                                          }
-                                       });
-                                    },
+                                    _tbody(fn),
                                  ),
                                  `Vous avez eu ${score}/${questions.length} points`,
                                  // TODO: update table above on submit
-                                 _form(
+                                 pseudoSubmitted && _form(
                                     _input('text')._att({ placeholder: 'Entrez votre pseudo pour enregistrer votre score' }),
                                  )._onsubmit((e) => {
                                     e.preventDefault()
@@ -297,7 +310,12 @@
                                        body: JSON.stringify({ username: username.value, score }),
                                     });
 
-                                    username.value = '';
+                                    e.target.style.display = 'none';
+                                    pseudoSubmitted = false;
+
+                                    const tbody = document.querySelector('tbody');
+                                    tbody.innerHTML = '';
+                                    fn(tbody);
                                  }),
                               )._onclick((e) => e.stopPropagation()),
                            )._att({ id: 'scoreboard' })._onclick((e) => {
@@ -305,12 +323,12 @@
                               e.target.style.transform = 'scale(0)';
                            }));
 
-                           submitted = true;
+                           qcmSubmitted = true;
                            router.refresh();
                         }),
-                     submitted &&
+                     qcmSubmitted &&
                         _button(_span('Réessayer'))._onclick((e) => {
-                           submitted = false;
+                           qcmSubmitted = false;
                            page = 1;
 
                            for (const question of questions) {
@@ -318,7 +336,11 @@
                            }
 
                            router.refresh();
-                           window.scrollTo(0, 0);
+                           window.scrollTo({
+                              top: document.body.offsetTop,
+                              left: 0,
+                              behavior: 'smooth'
+                           });
                         }),
                   ),
                ),
